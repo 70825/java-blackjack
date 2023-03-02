@@ -9,8 +9,11 @@ import blackjack.view.InputView;
 import blackjack.view.OutputView;
 
 import java.util.HashMap;
+import java.util.function.Supplier;
 
 public class BlackjackController {
+
+    private static final String MAX_ATTEMPT_REACHED_ERROR_MESSAGE = "최대 시도 횟수에 도달했습니다. 프로그램을 종료합니다.";
 
     private final InputView inputView;
     private final OutputView outputView;
@@ -23,7 +26,7 @@ public class BlackjackController {
     }
 
     public void run() {
-        String playerNames = inputView.inputPlayers();
+        final String playerNames = inputView.inputPlayers();
 
         Player dealer = new Player(new Name("딜러"), new Cards());
         Players players = new Players(playerNames);
@@ -105,5 +108,17 @@ public class BlackjackController {
     private void giveTwoCardToPlayer(Player player, Deck deck) {
         player.drawCard(deck.drawCard());
         player.drawCard(deck.drawCard());
+    }
+
+    private <T> T retry(final Supplier<T> supplier) {
+        for (int count = 0; count < 5; count++) {
+            try {
+                return supplier.get();
+            } catch (IllegalArgumentException e) {
+                outputView.printErrorMessage(e.getMessage());
+            }
+        }
+
+        throw new IllegalArgumentException(MAX_ATTEMPT_REACHED_ERROR_MESSAGE);
     }
 }

@@ -4,6 +4,8 @@ import java.sql.SQLOutput;
 import java.util.List;
 
 public class OutputView {
+    public static final String ERROR_PREFIX = "[ERROR] ";
+
     public void outputSplitMessage(String dealer, List<String> players) {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(dealer + "와 ");
@@ -33,5 +35,9 @@ public class OutputView {
 
     public void outputPlayerResult(String name, String result) {
         System.out.println(name + " : " + result);
+    }
+
+    public void printErrorMessage(String errorMessage) {
+        System.out.println(ERROR_PREFIX + errorMessage);
     }
 }
