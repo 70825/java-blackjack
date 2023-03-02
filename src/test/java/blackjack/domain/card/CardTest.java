@@ -1,7 +1,5 @@
 package blackjack.domain.card;
 
-import blackjack.domain.card.Card;
-import blackjack.domain.card.Cards;
 import blackjack.domain.participant.Player;
 import blackjack.domain.vo.Letter;
 import blackjack.domain.vo.Name;
