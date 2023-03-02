@@ -30,7 +30,7 @@ public class PlayerTest {
         player.drawCard(card);
 
         // then
-        Assertions.assertThat(player.getCards())
+        Assertions.assertThat(player.getCardNames())
                 .contains(card.getCardName());
     }
 
@@ -69,7 +69,7 @@ public class PlayerTest {
         player.drawCard(card1);
         player.drawCard(card2);
 
-        Assertions.assertThat(player.getCards()).contains(card1.getCardName(),card2.getCardName());
+        Assertions.assertThat(player.getCardNames()).contains(card1.getCardName(),card2.getCardName());
     }
 
     @Test

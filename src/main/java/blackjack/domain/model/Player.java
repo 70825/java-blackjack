@@ -22,17 +22,17 @@ public class Player {
         return cards.calculateTotalScore();
     }
 
-    public String getName() {
-        return name.get();
+    public List<String> getOneCard() {
+        return List.of(cards.getFirstCard().getCardName());
     }
 
-    public List<String> getCards() {
+    public List<String> getCardNames() {
         return cards.getCards().stream()
                 .map(Card::getCardName)
                 .collect(Collectors.toList());
     }
 
-    public List<String> getOneCard() {
-        return List.of(cards.getFirstCard().getCardName());
+    public String getName() {
+        return name.get();
     }
 }

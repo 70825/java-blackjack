@@ -40,7 +40,7 @@ public class BlackjackController {
         //TODO: 메서드 분리
         outputView.outputPlayerCard(dealer.getName(), dealer.getOneCard());
         for (Player player : players.getPlayers()) {
-            outputView.outputPlayerCard(player.getName(), player.getCards());
+            outputView.outputPlayerCard(player.getName(), player.getCardNames());
         }
 
         //TODO: 메서드 분리
@@ -60,11 +60,11 @@ public class BlackjackController {
         }
 
         HashMap<Player, Integer> scoreMap = new HashMap<>();
-        outputView.outputPlayerCard(dealer.getName(), dealer.getCards());
+        outputView.outputPlayerCard(dealer.getName(), dealer.getCardNames());
         scoreMap.put(dealer, dealer.calculateTotal());
         outputView.outputScore(scoreMap.get(dealer));
         for (Player player : players.getPlayers()) {
-            outputView.outputPlayerCard(player.getName(), player.getCards());
+            outputView.outputPlayerCard(player.getName(), player.getCardNames());
             scoreMap.put(player, player.calculateTotal());
             outputView.outputScore(scoreMap.get(player));
         }
