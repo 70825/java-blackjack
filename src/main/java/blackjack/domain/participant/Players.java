@@ -1,22 +1,19 @@
 package blackjack.domain.participant;
 
-import blackjack.domain.card.Cards;
-import blackjack.domain.vo.Name;
-
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class Participants {
+public class Players {
     private final List<Player> players;
 
-    public Participants(final String playersNames) {
+    public Players(final String playersNames) {
         this.players = makePlayers(playersNames);
     }
 
     private List<Player> makePlayers(final String playerNames) {
         return Arrays.stream(playerNames.split(","))
-                .map(name -> new Player(new Name(name), new Cards()))
+                .map(name -> new Player(new Name(name)))
                 .collect(Collectors.toList());
     }
 

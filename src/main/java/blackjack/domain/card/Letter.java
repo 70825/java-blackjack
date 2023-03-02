@@ -1,4 +1,4 @@
-package blackjack.domain.vo;
+package blackjack.domain.card;
 
 public enum Letter {
     TWO("2", 2),

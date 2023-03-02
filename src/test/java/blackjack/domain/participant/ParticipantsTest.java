@@ -15,7 +15,7 @@ class ParticipantsTest {
     @Test
     @DisplayName("플레이어들 생성 테스트")
     void constructorPlayersTest() {
-        assertThatNoException().isThrownBy(()->new Participants("test"));
+        assertThatNoException().isThrownBy(()->new Players("test"));
     }
 
     @Test
@@ -23,7 +23,7 @@ class ParticipantsTest {
     void getPlayersTest() {
         // given
         final String playerNames = "pobi,crong";
-        final Participants participants = new Participants(playerNames);
+        final Players participants = new Players(playerNames);
 
         // when
         final List<Player> actual = participants.getPlayers();
@@ -39,7 +39,7 @@ class ParticipantsTest {
     void getNamesTest() {
         // given
         final String playerNames = "pobi,crong";
-        final Participants participants = new Participants(playerNames);
+        final Players participants = new Players(playerNames);
         final List<String> expected = Arrays.stream(playerNames.split(",")).collect(Collectors.toList());
 
         // when

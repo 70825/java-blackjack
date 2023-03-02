@@ -2,9 +2,8 @@ package blackjack.domain.participant;
 
 import blackjack.domain.card.Card;
 import blackjack.domain.card.Cards;
-import blackjack.domain.vo.Letter;
-import blackjack.domain.vo.Name;
-import blackjack.domain.vo.Shape;
+import blackjack.domain.card.Letter;
+import blackjack.domain.card.Shape;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -18,14 +17,14 @@ public class PlayerTest {
     @Test
     @DisplayName("플레이어 생성 테스트")
     void constructorPlayer(){
-        assertThatNoException().isThrownBy(()->new Player(new Name("test"),new Cards()));
+        assertThatNoException().isThrownBy(()->new Player(new Name("test")));
     }
 
     @Test
     @DisplayName("카드 한장을 가져오는지 테스트")
     void drawCardTest() {
         // given
-        final Player player = new Player(new Name("test"), new Cards());
+        final Player player = new Player(new Name("test"));
         final Card card = new Card(Shape.CLOVER, Letter.ACE);
 
         // when
@@ -40,7 +39,7 @@ public class PlayerTest {
     @DisplayName("카드의 총 합을 보여주는 테스트")
     void calculateTotal(){
         // given
-        final Player player = new Player(new Name("test"), new Cards());
+        final Player player = new Player(new Name("test"));
         final Card card1 = new Card(Shape.CLOVER, Letter.ACE);
         final Card card2 = new Card(Shape.DIAMOND, Letter.JACK);
         final int expected = card1.getValue()+card2.getValue();
@@ -57,7 +56,7 @@ public class PlayerTest {
     @Test
     @DisplayName("플레이어 이름 반환하는 테스트")
     void getNameTest(){
-        final Player player = new Player(new Name("test"),new Cards());
+        final Player player = new Player(new Name("test"));
         assertThat(player.getName()).isEqualTo("test");
     }
 
@@ -65,7 +64,7 @@ public class PlayerTest {
     @DisplayName("플레이어의 카드 이름 리스트를 반환하는 테스트")
     void getCardsTest(){
         // given
-        final Player player = new Player(new Name("test"), new Cards());
+        final Player player = new Player(new Name("test"));
         final Card card1 = new Card(Shape.CLOVER, Letter.ACE);
         final Card card2 = new Card(Shape.DIAMOND, Letter.JACK);
         player.drawCard(card1);

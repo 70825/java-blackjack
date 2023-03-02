@@ -1,8 +1,5 @@
 package blackjack.domain.card;
 
-import blackjack.domain.vo.Letter;
-import blackjack.domain.vo.Shape;
-
 public class Card {
     final private Shape shape;
     final private Letter letter;

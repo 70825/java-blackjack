@@ -1,6 +1,5 @@
 package blackjack.view;
 
-import java.sql.SQLOutput;
 import java.util.List;
 
 public class OutputView {

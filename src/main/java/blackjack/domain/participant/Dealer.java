@@ -1,17 +1,18 @@
 package blackjack.domain.participant;
 
-import blackjack.domain.card.Cards;
-import blackjack.domain.vo.Name;
+import blackjack.domain.card.Card;
 
 import java.util.List;
 
 public class Dealer extends Participant {
 
-    public Dealer(Name name, Cards cards) {
-        super(name, cards);
+    public Dealer() {
+        super(new Name("딜러"));
     }
 
     public List<String> getOneCard() {
-        return List.of(super.getCards().get(0).getCardName());
+        Card firstCard = super.getCards().get(0);
+
+        return List.of(firstCard.getCardName());
     }
 }

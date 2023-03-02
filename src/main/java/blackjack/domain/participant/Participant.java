@@ -2,7 +2,6 @@ package blackjack.domain.participant;
 
 import blackjack.domain.card.Card;
 import blackjack.domain.card.Cards;
-import blackjack.domain.vo.Name;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -12,9 +11,9 @@ public abstract class Participant {
     private final Name name;
     private final Cards cards;
 
-    public Participant(final Name name, final Cards cards) {
+    public Participant(final Name name) {
         this.name = name;
-        this.cards = cards;
+        this.cards = new Cards();
     }
 
     public void drawCard(Card card) {

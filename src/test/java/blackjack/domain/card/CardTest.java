@@ -1,9 +1,7 @@
 package blackjack.domain.card;
 
 import blackjack.domain.participant.Player;
-import blackjack.domain.vo.Letter;
-import blackjack.domain.vo.Name;
-import blackjack.domain.vo.Shape;
+import blackjack.domain.participant.Name;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -23,7 +21,7 @@ public class CardTest {
     void getCardNameTest() {
         // given
         final Card card = new Card(Shape.DIAMOND, Letter.ACE);
-        final Player player = new Player(new Name("test"), new Cards());
+        final Player player = new Player(new Name("test"));
         final String expected = card.getCardName();
 
         // when

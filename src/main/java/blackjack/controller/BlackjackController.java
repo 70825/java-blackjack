@@ -7,8 +7,8 @@ import blackjack.domain.card.DeckMaker;
 import blackjack.domain.participant.Dealer;
 import blackjack.domain.participant.Participant;
 import blackjack.domain.participant.Player;
-import blackjack.domain.participant.Participants;
-import blackjack.domain.vo.Name;
+import blackjack.domain.participant.Players;
+import blackjack.domain.participant.Name;
 import blackjack.domain.vo.Order;
 import blackjack.view.InputView;
 import blackjack.view.OutputView;
@@ -34,7 +34,7 @@ public class BlackjackController {
         final String playerNames = inputView.inputPlayers();
 
         Dealer dealer = new Dealer(new Name("딜러"), new Cards());
-        Participants participants = new Participants(playerNames);
+        Players participants = new Players(playerNames);
         DeckMaker deckMaker = new DeckMaker();
         Deck deck = new Deck(deckMaker.makeDeck(), cardPicker);
 
