@@ -7,7 +7,7 @@ import blackjack.domain.vo.Shape;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DeckMakerService {
+public class DeckMaker {
     public List<Card> makeDeck() {
         final List<Card> deck = new ArrayList<>();
         for (Shape shape : Shape.values()) {

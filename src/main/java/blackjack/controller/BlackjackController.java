@@ -2,7 +2,7 @@ package blackjack.controller;
 
 import blackjack.domain.CardPicker;
 import blackjack.domain.model.*;
-import blackjack.domain.service.DeckMakerService;
+import blackjack.domain.service.DeckMaker;
 import blackjack.domain.vo.Name;
 import blackjack.domain.vo.Order;
 import blackjack.view.InputView;
@@ -27,8 +27,8 @@ public class BlackjackController {
 
         Player dealer = new Player(new Name("딜러"), new Cards());
         Players players = new Players(playerNames);
-        DeckMakerService deckMakerService = new DeckMakerService();
-        Deck deck = new Deck(deckMakerService.makeDeck(), cardPicker);
+        DeckMaker deckMaker = new DeckMaker();
+        Deck deck = new Deck(deckMaker.makeDeck(), cardPicker);
 
         //TODO: 메서드 분리
         outputView.outputSplitMessage(dealer.getName(), players.getNames());
