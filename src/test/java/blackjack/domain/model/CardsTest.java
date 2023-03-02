@@ -21,9 +21,9 @@ public class CardsTest {
     @DisplayName("카드를 추가한다")
     void addCardsTest() {
         // given
-        Cards cards = new Cards();
-        Card card = new Card(Shape.CLOVER, Letter.ACE);
-        List<Card> expectedCards = List.of(card);
+        final Cards cards = new Cards();
+        final Card card = new Card(Shape.CLOVER, Letter.ACE);
+        final List<Card> expectedCards = List.of(card);
 
         // when
         cards.add(card);

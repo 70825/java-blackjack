@@ -23,11 +23,11 @@ public class DeckMakerServiceTest {
     @DisplayName("중복되지 않은 52장의 카드 생성 테스트")
     void makeDeckTest(){
         // given
-        DeckMakerService deckMakerService = new DeckMakerService();
+        final DeckMakerService deckMakerService = new DeckMakerService();
 
         // when
-        List<Card> deck = deckMakerService.makeDeck();
-        HashSet<Card> cardSet = new HashSet<>(deck);
+        final List<Card> deck = deckMakerService.makeDeck();
+        final HashSet<Card> cardSet = new HashSet<>(deck);
         // then
         assertThat(cardSet.size()).isEqualTo(deck.size());
         assertThat(deck.size()).isEqualTo(52);

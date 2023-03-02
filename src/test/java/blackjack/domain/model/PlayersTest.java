@@ -23,11 +23,11 @@ class PlayersTest {
     @DisplayName("플레이어의 리스트를 반환하는 테스트")
     void getPlayersTest() {
         // given
-        String playerNames = "pobi,crong";
-        Players players = new Players(playerNames);
+        final String playerNames = "pobi,crong";
+        final Players players = new Players(playerNames);
 
         // when
-        List<Player> actual = players.getPlayers();
+        final List<Player> actual = players.getPlayers();
 
         // then
         for (int i = 0; i < actual.size(); i++){
@@ -39,12 +39,12 @@ class PlayersTest {
     @DisplayName("플레이어의 이름들을 반환하는 테스트")
     void getNamesTest() {
         // given
-        String playerNames = "pobi,crong";
-        Players players = new Players(playerNames);
-        List<String> expected = Arrays.stream(playerNames.split(",")).collect(Collectors.toList());
+        final String playerNames = "pobi,crong";
+        final Players players = new Players(playerNames);
+        final List<String> expected = Arrays.stream(playerNames.split(",")).collect(Collectors.toList());
 
         // when
-        List<String> actual = players.getNames();
+        final List<String> actual = players.getNames();
 
         // then
         Assertions.assertThat(actual).isEqualTo(expected);

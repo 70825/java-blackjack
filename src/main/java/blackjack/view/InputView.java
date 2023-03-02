@@ -8,7 +8,7 @@ public class InputView {
 
     private final Scanner scanner;
 
-    public InputView(Scanner scanner) {
+    public InputView(final Scanner scanner) {
         this.scanner = scanner;
     }
 
@@ -17,7 +17,7 @@ public class InputView {
         return scanner.nextLine();
     }
 
-    public String inputOrderCard(String name) {
+    public String inputOrderCard(final String name) {
         System.out.printf(String.format(INPUT_ORDER_CARD_MESSAGE, name));
         return scanner.nextLine();
     }

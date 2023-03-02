@@ -21,13 +21,13 @@ public class CardTest {
     @DisplayName("정확한 카드 숫자와 모양이 출력되는지 테스트")
     void getCardNameTest() {
         // given
-        Card card = new Card(Shape.DIAMOND, Letter.ACE);
-        Player player = new Player(new Name("test"), new Cards());
-        String expected = card.getCardName();
+        final Card card = new Card(Shape.DIAMOND, Letter.ACE);
+        final Player player = new Player(new Name("test"), new Cards());
+        final String expected = card.getCardName();
 
         // when
         player.drawCard(card);
-        String actual = player.getOneCard().get(0);
+        final String actual = player.getOneCard().get(0);
 
         // then
         assertThat(actual).isEqualTo(expected);

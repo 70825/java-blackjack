@@ -16,8 +16,8 @@ public class NameTest {
     @Test
     @DisplayName("이름이 들어갔는지 확인하는 테스트")
     void insertNameTest(){
-        String nameString = "test";
-        Name name = new Name(nameString);
+        final String nameString = "test";
+        final Name name = new Name(nameString);
 
         assertThat(name.get()).isEqualTo(nameString);
     }

@@ -16,7 +16,7 @@ public class BlackjackController {
     private final OutputView outputView;
     private final CardPicker cardPicker;
 
-    BlackjackController(final InputView inputView, final OutputView outputView, CardPicker cardPicker) {
+    BlackjackController(final InputView inputView, final OutputView outputView, final CardPicker cardPicker) {
         this.inputView = inputView;
         this.outputView = outputView;
         this.cardPicker = cardPicker;

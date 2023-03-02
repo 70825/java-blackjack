@@ -15,16 +15,16 @@ public class Cards {
     }
 
     public List<Card> getCards() {
-        return this.cards;
+        return cards;
     }
 
     public int calculateTotalScore() {
-        return this.cards.stream().
+        return cards.stream().
                 map(Card::getValue).
                 reduce(0, Integer::sum);
     }
 
     public Card getFirstCard() {
-        return this.cards.get(0);
+        return cards.get(0);
     }
 }

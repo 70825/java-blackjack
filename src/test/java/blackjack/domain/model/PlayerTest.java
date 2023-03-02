@@ -23,8 +23,8 @@ public class PlayerTest {
     @DisplayName("카드 한장을 가져오는지 테스트")
     void drawCardTest() {
         // given
-        Player player = new Player(new Name("test"), new Cards());
-        Card card = new Card(Shape.CLOVER, Letter.ACE);
+        final Player player = new Player(new Name("test"), new Cards());
+        final Card card = new Card(Shape.CLOVER, Letter.ACE);
 
         // when
         player.drawCard(card);
@@ -38,15 +38,15 @@ public class PlayerTest {
     @DisplayName("카드의 총 합을 보여주는 테스트")
     void calculateTotal(){
         // given
-        Player player = new Player(new Name("test"), new Cards());
-        Card card1 = new Card(Shape.CLOVER, Letter.ACE);
-        Card card2 = new Card(Shape.DIAMOND, Letter.JACK);
-        int expected = card1.getValue()+card2.getValue();
+        final Player player = new Player(new Name("test"), new Cards());
+        final Card card1 = new Card(Shape.CLOVER, Letter.ACE);
+        final Card card2 = new Card(Shape.DIAMOND, Letter.JACK);
+        final int expected = card1.getValue()+card2.getValue();
         player.drawCard(card1);
         player.drawCard(card2);
 
         // when
-        int actual = player.calculateTotal();
+        final int actual = player.calculateTotal();
 
         // then
         assertThat(actual).isEqualTo(expected);
@@ -55,7 +55,7 @@ public class PlayerTest {
     @Test
     @DisplayName("플레이어 이름 반환하는 테스트")
     void getNameTest(){
-        Player player = new Player(new Name("test"),new Cards());
+        final Player player = new Player(new Name("test"),new Cards());
         assertThat(player.getName()).isEqualTo("test");
     }
 
@@ -63,9 +63,9 @@ public class PlayerTest {
     @DisplayName("플레이어의 카드 이름 리스트를 반환하는 테스트")
     void getCardsTest(){
         // given
-        Player player = new Player(new Name("test"), new Cards());
-        Card card1 = new Card(Shape.CLOVER, Letter.ACE);
-        Card card2 = new Card(Shape.DIAMOND, Letter.JACK);
+        final Player player = new Player(new Name("test"), new Cards());
+        final Card card1 = new Card(Shape.CLOVER, Letter.ACE);
+        final Card card2 = new Card(Shape.DIAMOND, Letter.JACK);
         player.drawCard(card1);
         player.drawCard(card2);
 
@@ -75,13 +75,13 @@ public class PlayerTest {
     @Test
     @DisplayName("카드 한장을 가져오는 테스트")
     void getOneCardTest(){
-        Player player = new Player(new Name("test"), new Cards());
-        Card card1 = new Card(Shape.CLOVER, Letter.ACE);
-        Card card2 = new Card(Shape.DIAMOND, Letter.JACK);
+        final Player player = new Player(new Name("test"), new Cards());
+        final Card card1 = new Card(Shape.CLOVER, Letter.ACE);
+        final Card card2 = new Card(Shape.DIAMOND, Letter.JACK);
         player.drawCard(card1);
         player.drawCard(card2);
 
-        List<String> expected = player.getOneCard();
+        final List<String> expected = player.getOneCard();
         Assertions.assertThat(expected.size()).isEqualTo(1);
         Assertions.assertThat(expected).contains(card1.getCardName());
     }

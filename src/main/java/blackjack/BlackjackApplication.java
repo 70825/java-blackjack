@@ -11,11 +11,11 @@ import java.util.Scanner;
 public class BlackjackApplication {
 
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+        final Scanner scanner = new Scanner(System.in);
 
-        InputView inputView = new InputView(scanner);
-        OutputView outputView = new OutputView();
-        CardPicker cardPicker = new RandomCardPicker();
+        final InputView inputView = new InputView(scanner);
+        final OutputView outputView = new OutputView();
+        final CardPicker cardPicker = new RandomCardPicker();
 
         // BlackjackController blackjackController = new BlackjackController(inputView, outputView, cardPicker);
 

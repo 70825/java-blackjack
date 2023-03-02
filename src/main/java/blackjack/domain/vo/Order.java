@@ -6,7 +6,7 @@ public enum Order {
 
     private final String value;
 
-    Order(String value) {
+    Order(final String value) {
         this.value = value;
     }
 }

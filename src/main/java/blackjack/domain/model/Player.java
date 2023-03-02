@@ -2,7 +2,6 @@ package blackjack.domain.model;
 
 import blackjack.domain.vo.Name;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -10,12 +9,12 @@ public class Player {
     private final Name name;
     private final Cards cards;
 
-    public Player(Name name, Cards cards) {
+    public Player(final Name name, final Cards cards) {
         this.name = name;
         this.cards = cards;
     }
 
-    public void drawCard(Card card) {
+    public void drawCard(final Card card) {
         cards.add(card);
     }
 
@@ -34,6 +33,6 @@ public class Player {
     }
 
     public List<String> getOneCard() {
-        return List.of(this.cards.getFirstCard().getCardName());
+        return List.of(cards.getFirstCard().getCardName());
     }
 }

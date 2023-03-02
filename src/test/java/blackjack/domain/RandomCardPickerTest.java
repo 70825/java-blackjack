@@ -10,11 +10,11 @@ class RandomCardPickerTest {
     @DisplayName("범위에 맞는 랜덤한 정수를 가져온다.")
     void pickIndexTest() {
         // given
-        CardPicker cardPicker = new RandomCardPicker();
-        int size = 10;
+        final CardPicker cardPicker = new RandomCardPicker();
+        final int size = 10;
 
         // when
-        int actual = cardPicker.pickIndex(size);
+        final int actual = cardPicker.pickIndex(size);
 
         // then
         Assertions.assertThat(actual)

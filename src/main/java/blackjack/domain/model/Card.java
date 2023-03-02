@@ -17,6 +17,6 @@ public class Card {
     }
 
     public int getValue() {
-        return this.letter.getValue();
+        return letter.getValue();
     }
 }

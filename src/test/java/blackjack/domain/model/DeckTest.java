@@ -17,8 +17,8 @@ public class DeckTest {
     @Test
     @DisplayName("덱을 생성한다.")
     void constructorDeckTest() {
-        List<Card> cards = List.of();
-        CardPicker cardPicker = new TestCardPicker();
+        final List<Card> cards = List.of();
+        final CardPicker cardPicker = new TestCardPicker();
 
         Assertions.assertThatNoException().isThrownBy(() -> new Deck(cards, cardPicker));
     }
@@ -27,15 +27,15 @@ public class DeckTest {
     @DisplayName("카드를 뽑는다")
     void drawCardTest(){
         //given
-        List<Card> cards = new ArrayList<>(
+        final List<Card> cards = new ArrayList<>(
                 Arrays.asList(
                 new Card(Shape.CLOVER, Letter.ACE),
                 new Card(Shape.DIAMOND,Letter.JACK)));
-        CardPicker testCardPicker = new TestCardPicker();
-        Deck deck = new Deck(cards, testCardPicker);
+        final CardPicker testCardPicker = new TestCardPicker();
+        final Deck deck = new Deck(cards, testCardPicker);
 
         //when
-        Card card = deck.drawCard();
+        final Card card = deck.drawCard();
 
         //then
         assertThat(card.getValue()).isEqualTo(Letter.ACE.getValue());
@@ -44,12 +44,12 @@ public class DeckTest {
     @Test
     @DisplayName("덱 반환 테스트")
     void getCardsTest(){
-        List<Card> cards = new ArrayList<>(
+        final List<Card> cards = new ArrayList<>(
                 Arrays.asList(
                         new Card(Shape.CLOVER, Letter.ACE),
                         new Card(Shape.DIAMOND,Letter.JACK)));
-        CardPicker testCardPicker = new TestCardPicker();
-        Deck deck = new Deck(cards, testCardPicker);
+        final CardPicker testCardPicker = new TestCardPicker();
+        final Deck deck = new Deck(cards, testCardPicker);
 
         assertThat(deck.getCards()).isEqualTo(cards);
     }

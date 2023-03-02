@@ -5,7 +5,7 @@ import blackjack.domain.CardPicker;
 public class TestCardPicker implements CardPicker {
 
     @Override
-    public int pickIndex(int size){
+    public int pickIndex(final int size){
         return 0;
     }
 }

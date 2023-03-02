@@ -14,7 +14,7 @@ public class Deck {
     }
 
     public Card drawCard() {
-        int index = cardPicker.pickIndex(cards.size());
+        final int index = cardPicker.pickIndex(cards.size());
         Card card = cards.get(index);
         cards.remove(index);
         return card;
