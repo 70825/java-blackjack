@@ -54,24 +54,24 @@ public class BlackjackController {
             while (inputView.inputOrderCard(player.getName()).equals(Order.NO)) {
                 player.drawCard(deck.drawCard());
 
-                if (player.calculateTotal() > 21) {
+                if (player.getTotalScore() > 21) {
                     break;
                 }
             }
         }
 
-        while (dealer.calculateTotal() <= 16) {
+        while (dealer.getTotalScore() <= 16) {
             outputView.outputDealerDrawCard(dealer.getName());
             dealer.drawCard(deck.drawCard());
         }
 
         HashMap<Player, Integer> scoreMap = new HashMap<>();
         outputView.outputPlayerCard(dealer.getName(), dealer.getCardNames());
-        scoreMap.put(dealer, dealer.calculateTotal());
+        scoreMap.put(dealer, dealer.getTotalScore());
         outputView.outputScore(scoreMap.get(dealer));
         for (Player player : players.getPlayers()) {
             outputView.outputPlayerCard(player.getName(), player.getCardNames());
-            scoreMap.put(player, player.calculateTotal());
+            scoreMap.put(player, player.getTotalScore());
             outputView.outputScore(scoreMap.get(player));
         }
 
