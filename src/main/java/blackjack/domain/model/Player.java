@@ -9,7 +9,8 @@ import java.util.stream.Collectors;
 public class Player {
     private final Name name;
     private final Cards cards;
-    public Player(Name name, Cards cards){
+
+    public Player(Name name, Cards cards) {
         this.name = name;
         this.cards = cards;
     }
@@ -18,8 +19,8 @@ public class Player {
         cards.add(card);
     }
 
-    public int calculateTotal(){
-        return this.cards.calculateTotalScore();
+    public int calculateTotal() {
+        return cards.calculateTotalScore();
     }
 
     public String getName() {
@@ -32,7 +33,7 @@ public class Player {
                 .collect(Collectors.toList());
     }
 
-    public List<String> getOneCard(){
+    public List<String> getOneCard() {
         return List.of(this.cards.getFirstCard().getCardName());
     }
 }

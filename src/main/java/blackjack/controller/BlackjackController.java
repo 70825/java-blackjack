@@ -28,13 +28,13 @@ public class BlackjackController {
         Player dealer = new Player(new Name("딜러"), new Cards());
         Players players = new Players(playerNames);
         DeckMakerService deckMakerService = new DeckMakerService();
-        Deck deck = new Deck(deckMakerService.makeDeck(),cardPicker);
+        Deck deck = new Deck(deckMakerService.makeDeck(), cardPicker);
 
         //TODO: 메서드 분리
         outputView.outputSplitMessage(dealer.getName(), players.getNames());
-        giveTwoCardToPlayer(dealer,deck);
-        for(Player player:players.getPlayers()){
-            giveTwoCardToPlayer(player,deck);
+        giveTwoCardToPlayer(dealer, deck);
+        for (Player player : players.getPlayers()) {
+            giveTwoCardToPlayer(player, deck);
         }
 
         //TODO: 메서드 분리
@@ -45,7 +45,7 @@ public class BlackjackController {
 
         //TODO: 메서드 분리
         for (Player player : players.getPlayers()) {
-            while(inputView.inputOrderCard(player.getName()).equals(Order.NO)) {
+            while (inputView.inputOrderCard(player.getName()).equals(Order.NO)) {
                 player.drawCard(deck.drawCard());
 
                 if (player.calculateTotal() > 21) {
@@ -59,13 +59,13 @@ public class BlackjackController {
             dealer.drawCard(deck.drawCard());
         }
 
-        HashMap<Player,Integer> scoreMap = new HashMap<>();
+        HashMap<Player, Integer> scoreMap = new HashMap<>();
         outputView.outputPlayerCard(dealer.getName(), dealer.getCards());
-        scoreMap.put(dealer,dealer.calculateTotal());
+        scoreMap.put(dealer, dealer.calculateTotal());
         outputView.outputScore(scoreMap.get(dealer));
-        for(Player player: players.getPlayers()) {
+        for (Player player : players.getPlayers()) {
             outputView.outputPlayerCard(player.getName(), player.getCards());
-            scoreMap.put(player,player.calculateTotal());
+            scoreMap.put(player, player.calculateTotal());
             outputView.outputScore(scoreMap.get(player));
         }
 
@@ -74,11 +74,11 @@ public class BlackjackController {
         int tie = 0;
         int lose = 0;
         int dealerScore = scoreMap.get(dealer);
-        for(Player player: players.getPlayers()) {
+        for (Player player : players.getPlayers()) {
             int playerScore = scoreMap.get(player);
-            if(playerScore>21){
-                if(dealerScore>21) tie++;
-                if(dealerScore<=21) win++;
+            if (playerScore > 21) {
+                if (dealerScore > 21) tie++;
+                if (dealerScore <= 21) win++;
                 continue;
             }
             if (dealerScore <= 21 && dealerScore > playerScore) win++;
@@ -89,7 +89,7 @@ public class BlackjackController {
         outputView.outputDealerResult(dealer.getName(), win, tie, lose);
 
 
-        for(Player player: players.getPlayers()) {
+        for (Player player : players.getPlayers()) {
             if (scoreMap.get(dealer) > scoreMap.get(player)) {
                 outputView.outputPlayerResult(player.getName(), "승");
             }
@@ -102,7 +102,7 @@ public class BlackjackController {
         }
     }
 
-    private void giveTwoCardToPlayer(Player player, Deck deck){
+    private void giveTwoCardToPlayer(Player player, Deck deck) {
         player.drawCard(deck.drawCard());
         player.drawCard(deck.drawCard());
     }

@@ -21,9 +21,10 @@ public class Cards {
     public int calculateTotalScore() {
         return this.cards.stream().
                 map(Card::getValue).
-                reduce(0,Integer::sum);
+                reduce(0, Integer::sum);
     }
-    public Card getFirstCard(){
+
+    public Card getFirstCard() {
         return this.cards.get(0);
     }
 }
