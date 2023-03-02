@@ -1,6 +1,4 @@
-package blackjack.domain.model;
-
-import blackjack.domain.CardPicker;
+package blackjack.domain.cardPicker;
 
 public class TestCardPicker implements CardPicker {
 
