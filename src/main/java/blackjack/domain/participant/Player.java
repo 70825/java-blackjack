@@ -20,7 +20,7 @@ public class Player {
         cards.add(card);
     }
 
-    public int calculateTotal() {
+    public int getTotalScore() {
         return cards.calculateTotalScore();
     }
 

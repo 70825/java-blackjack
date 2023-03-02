@@ -49,7 +49,7 @@ public class PlayerTest {
         player.drawCard(card2);
 
         // when
-        final int actual = player.calculateTotal();
+        final int actual = player.getTotalScore();
 
         // then
         assertThat(actual).isEqualTo(expected);
