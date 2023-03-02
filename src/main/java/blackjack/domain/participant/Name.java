@@ -7,7 +7,7 @@ public class Name {
         this.value = value;
     }
 
-    public String get() {
+    public String getValue() {
         return value;
     }
 }

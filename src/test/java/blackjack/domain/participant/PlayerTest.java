@@ -76,7 +76,7 @@ public class PlayerTest {
     @Test
     @DisplayName("카드 한장을 가져오는 테스트")
     void getOneCardTest(){
-        final Dealer dealer = new Dealer(new Name("test"), new Cards());
+        final Dealer dealer = new Dealer();
         final Card card1 = new Card(Shape.CLOVER, Letter.ACE);
         final Card card2 = new Card(Shape.DIAMOND, Letter.JACK);
         dealer.drawCard(card1);

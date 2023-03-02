@@ -33,7 +33,7 @@ public class BlackjackController {
     public void run() {
         final String playerNames = inputView.inputPlayers();
 
-        Dealer dealer = new Dealer(new Name("딜러"), new Cards());
+        Dealer dealer = new Dealer();
         Players participants = new Players(playerNames);
         DeckMaker deckMaker = new DeckMaker();
         Deck deck = new Deck(deckMaker.makeDeck(), cardPicker);

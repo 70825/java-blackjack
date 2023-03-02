@@ -1,6 +1,5 @@
 package blackjack.domain.participant;
 
-import blackjack.domain.participant.Name;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -20,6 +19,6 @@ public class NameTest {
         final String nameString = "test";
         final Name name = new Name(nameString);
 
-        assertThat(name.get()).isEqualTo(nameString);
+        assertThat(name.getValue()).isEqualTo(nameString);
     }
 }
