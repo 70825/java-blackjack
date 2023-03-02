@@ -1,7 +1,7 @@
 package blackjack.domain.model;
 
 import blackjack.domain.participant.Player;
-import blackjack.domain.participant.Players;
+import blackjack.domain.participant.Participants;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -12,12 +12,12 @@ import java.util.stream.Collectors;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatNoException;
 
-class PlayersTest {
+class ParticipantsTest {
 
     @Test
     @DisplayName("플레이어들 생성 테스트")
     void constructorPlayersTest() {
-        assertThatNoException().isThrownBy(()->new Players("test"));
+        assertThatNoException().isThrownBy(()->new Participants("test"));
     }
 
     @Test
@@ -25,14 +25,14 @@ class PlayersTest {
     void getPlayersTest() {
         // given
         final String playerNames = "pobi,crong";
-        final Players players = new Players(playerNames);
+        final Participants participants = new Participants(playerNames);
 
         // when
-        final List<Player> actual = players.getPlayers();
+        final List<Player> actual = participants.getPlayers();
 
         // then
         for (int i = 0; i < actual.size(); i++){
-            Assertions.assertThat(players.getPlayers().get(i).getName()).isEqualTo(playerNames.split(",")[i]);
+            Assertions.assertThat(participants.getPlayers().get(i).getName()).isEqualTo(playerNames.split(",")[i]);
         }
     }
 
@@ -41,11 +41,11 @@ class PlayersTest {
     void getNamesTest() {
         // given
         final String playerNames = "pobi,crong";
-        final Players players = new Players(playerNames);
+        final Participants participants = new Participants(playerNames);
         final List<String> expected = Arrays.stream(playerNames.split(",")).collect(Collectors.toList());
 
         // when
-        final List<String> actual = players.getNames();
+        final List<String> actual = participants.getNames();
 
         // then
         Assertions.assertThat(actual).isEqualTo(expected);

@@ -7,10 +7,10 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class Players {
+public class Participants {
     private final List<Player> players;
 
-    public Players(final String playersNames) {
+    public Participants(final String playersNames) {
         this.players = makePlayers(playersNames);
     }
 
