@@ -29,6 +29,10 @@ public abstract class Participant {
         return name.get();
     }
 
+    public List<Card> getCards() {
+        return cards.getCards();
+    }
+
     public List<String> getCardNames() {
         return cards.getCards().stream()
                 .map(Card::getCardName)

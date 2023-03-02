@@ -4,6 +4,8 @@ import blackjack.domain.CardPicker;
 import blackjack.domain.card.Cards;
 import blackjack.domain.card.Deck;
 import blackjack.domain.card.DeckMaker;
+import blackjack.domain.participant.Dealer;
+import blackjack.domain.participant.Participant;
 import blackjack.domain.participant.Player;
 import blackjack.domain.participant.Players;
 import blackjack.domain.vo.Name;
@@ -31,7 +33,7 @@ public class BlackjackController {
     public void run() {
         final String playerNames = inputView.inputPlayers();
 
-        Player dealer = new Player(new Name("딜러"), new Cards());
+        Dealer dealer = new Dealer(new Name("딜러"), new Cards());
         Players players = new Players(playerNames);
         DeckMaker deckMaker = new DeckMaker();
         Deck deck = new Deck(deckMaker.makeDeck(), cardPicker);
@@ -65,7 +67,7 @@ public class BlackjackController {
             dealer.drawCard(deck.drawCard());
         }
 
-        HashMap<Player, Integer> scoreMap = new HashMap<>();
+        HashMap<Participant, Integer> scoreMap = new HashMap<>();
         outputView.outputPlayerCard(dealer.getName(), dealer.getCardNames());
         scoreMap.put(dealer, dealer.getTotalScore());
         outputView.outputScore(scoreMap.get(dealer));
@@ -108,7 +110,7 @@ public class BlackjackController {
         }
     }
 
-    private void giveTwoCardToPlayer(Player player, Deck deck) {
+    private void giveTwoCardToPlayer(Participant player, Deck deck) {
         player.drawCard(deck.drawCard());
         player.drawCard(deck.drawCard());
     }

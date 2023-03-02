@@ -30,7 +30,7 @@ public class CardTest {
 
         // when
         player.drawCard(card);
-        final String actual = player.getOneCard().get(0);
+        final String actual = player.getCards().get(0).getCardName();
 
         // then
         assertThat(actual).isEqualTo(expected);

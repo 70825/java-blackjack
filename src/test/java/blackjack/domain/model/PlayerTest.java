@@ -2,6 +2,7 @@ package blackjack.domain.model;
 
 import blackjack.domain.card.Card;
 import blackjack.domain.card.Cards;
+import blackjack.domain.participant.Dealer;
 import blackjack.domain.participant.Player;
 import blackjack.domain.vo.Letter;
 import blackjack.domain.vo.Name;
@@ -78,13 +79,13 @@ public class PlayerTest {
     @Test
     @DisplayName("카드 한장을 가져오는 테스트")
     void getOneCardTest(){
-        final Player player = new Player(new Name("test"), new Cards());
+        final Dealer dealer = new Dealer(new Name("test"), new Cards());
         final Card card1 = new Card(Shape.CLOVER, Letter.ACE);
         final Card card2 = new Card(Shape.DIAMOND, Letter.JACK);
-        player.drawCard(card1);
-        player.drawCard(card2);
+        dealer.drawCard(card1);
+        dealer.drawCard(card2);
 
-        final List<String> expected = player.getOneCard();
+        final List<String> expected = dealer.getOneCard();
         Assertions.assertThat(expected.size()).isEqualTo(1);
         Assertions.assertThat(expected).contains(card1.getCardName());
     }
