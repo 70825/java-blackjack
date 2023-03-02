@@ -1,6 +1,7 @@
 package blackjack.domain.model;
 
-import blackjack.domain.vo.Name;
+import blackjack.domain.participant.Player;
+import blackjack.domain.participant.Players;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

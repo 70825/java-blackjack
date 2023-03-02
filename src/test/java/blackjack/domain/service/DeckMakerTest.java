@@ -1,6 +1,7 @@
 package blackjack.domain.service;
 
-import blackjack.domain.model.Card;
+import blackjack.domain.card.Card;
+import blackjack.domain.card.DeckMaker;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

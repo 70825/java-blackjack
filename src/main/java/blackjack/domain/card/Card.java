@@ -1,4 +1,4 @@
-package blackjack.domain.model;
+package blackjack.domain.card;
 
 import blackjack.domain.vo.Letter;
 import blackjack.domain.vo.Shape;
