@@ -20,6 +20,10 @@ public abstract class Participant {
         cards.add(card);
     }
 
+    public boolean isBust() {
+        return getTotalScore() > 21;
+    }
+
     public int getTotalScore() {
         return cards.calculateTotalScore();
     }

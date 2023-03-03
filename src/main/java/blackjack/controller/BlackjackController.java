@@ -1,24 +1,17 @@
 package blackjack.controller;
 
+import blackjack.domain.game.BlackjackGame;
 import blackjack.domain.cardPicker.CardPicker;
-import blackjack.domain.card.Cards;
 import blackjack.domain.card.Deck;
 import blackjack.domain.card.DeckMaker;
-import blackjack.domain.participant.Dealer;
-import blackjack.domain.participant.Participant;
-import blackjack.domain.participant.Player;
-import blackjack.domain.participant.Players;
-import blackjack.domain.participant.Name;
-import blackjack.domain.vo.Order;
+import blackjack.domain.participant.*;
 import blackjack.view.InputView;
 import blackjack.view.OutputView;
 
 import java.util.HashMap;
-import java.util.function.Supplier;
+import java.util.List;
 
 public class BlackjackController {
-
-    private static final String MAX_ATTEMPT_REACHED_ERROR_MESSAGE = "최대 시도 횟수에 도달했습니다. 프로그램을 종료합니다.";
 
     private final InputView inputView;
     private final OutputView outputView;
@@ -31,99 +24,140 @@ public class BlackjackController {
     }
 
     public void run() {
-        final String playerNames = inputView.inputPlayers();
+        final Participants participants = makeParticipants();
+        final Deck deck = makeDeck();
+        final BlackjackGame blackjackGame = new BlackjackGame(participants, deck);
 
+        startGame(blackjackGame);
+        showAllParticipantCards(participants);
+
+        hitParticipants(blackjackGame);
+
+        showAllCardsAndScore(blackjackGame);
+
+        showAllResult(blackjackGame);
+
+
+
+//        outputView.outputResult();
+//        int win = 0;
+//        int tie = 0;
+//        int lose = 0;
+//        int dealerScore = scoreMap.get(dealer);
+//        for (Player player : players.getPlayers()) {
+//            int playerScore = scoreMap.get(player);
+//            if (playerScore > 21) {
+//                if (dealerScore > 21) tie++;
+//                if (dealerScore <= 21) win++;
+//                continue;
+//            }
+//            if (dealerScore <= 21 && dealerScore > playerScore) win++;
+//            if (dealerScore <= 21 && dealerScore == playerScore) tie++;
+//            if (dealerScore <= 21 && dealerScore < playerScore) lose++;
+//        }
+//
+//        outputView.outputDealerResult(dealer.getName(), win, tie, lose);
+//
+//
+//        for (Player player : players.getPlayers()) {
+//            if (scoreMap.get(dealer) > scoreMap.get(player)) {
+//                outputView.outputPlayerResult(player.getName(), "승");
+//            }
+//            if (scoreMap.get(dealer) == scoreMap.get(player)) {
+//                outputView.outputPlayerResult(player.getName(), "무");
+//            }
+//            if (scoreMap.get(dealer) < scoreMap.get(player)) {
+//                outputView.outputPlayerResult(player.getName(), "패");
+//            }
+//        }
+    }
+
+    private Participants makeParticipants() {
         Dealer dealer = new Dealer();
-        Players participants = new Players(playerNames);
+        String playerNames = inputView.inputPlayers();
+        return new Participants(dealer, playerNames);
+    }
+
+    private Deck makeDeck() {
         DeckMaker deckMaker = new DeckMaker();
-        Deck deck = new Deck(deckMaker.makeDeck(), cardPicker);
+        return new Deck(deckMaker.makeDeck(), cardPicker);
+    }
 
-        //TODO: 메서드 분리
-        outputView.outputSplitMessage(dealer.getName(), participants.getNames());
-        giveTwoCardToPlayer(dealer, deck);
-        for (Player player : participants.getPlayers()) {
-            giveTwoCardToPlayer(player, deck);
-        }
+    private void startGame(BlackjackGame blackjackGame) {
+        Participants participants = blackjackGame.getParticipants();
+        Dealer dealer = participants.getDealer();
+        List<String> playerNames = participants.getPlayerNames();
 
-        //TODO: 메서드 분리
+        outputView.outputSplitMessage(dealer.getName(), playerNames);
+        blackjackGame.giveTwoCardEveryone();
+    }
+
+    private void showAllParticipantCards(Participants participants) {
+        Dealer dealer = participants.getDealer();
         outputView.outputPlayerCard(dealer.getName(), dealer.getOneCard());
-        for (Player player : participants.getPlayers()) {
+
+        List<Player> players = participants.getPlayers();
+        for (Player player : players) {
             outputView.outputPlayerCard(player.getName(), player.getCardNames());
         }
+    }
 
-        //TODO: 메서드 분리
-        for (Player player : participants.getPlayers()) {
-            while (inputView.inputOrderCard(player.getName()).equals(Order.NO)) {
-                player.drawCard(deck.drawCard());
+    private void hitParticipants(BlackjackGame blackjackGame) {
+        hitPlayers(blackjackGame);
+        hitDealer(blackjackGame);
+    }
 
-                if (player.getTotalScore() > 21) {
-                    break;
-                }
-            }
+    private void hitPlayers(BlackjackGame blackjackGame) {
+        List<Player> players = blackjackGame.getParticipants().getPlayers();
+
+        for (Player player : players) {
+            hitEachPlayer(blackjackGame, player);
+            outputView.outputPlayerCard(player.getName(), player.getCardNames());
         }
+    }
 
-        while (dealer.getTotalScore() <= 16) {
+    private void hitEachPlayer(BlackjackGame blackjackGame, Player player) {
+        String wantOrder = inputView.inputOrderCard(player.getName());
+
+        while(!player.isBust() && wantOrder.equals("n")) {
+            blackjackGame.drawCard(player);
+            wantOrder = inputView.inputOrderCard(player.getName());
+        }
+    }
+
+    private void hitDealer(BlackjackGame blackjackGame) {
+        Dealer dealer = blackjackGame.getParticipants().getDealer();
+
+        while(dealer.canHit()) {
             outputView.outputDealerDrawCard(dealer.getName());
-            dealer.drawCard(deck.drawCard());
+            blackjackGame.drawCard(dealer);
         }
+    }
 
-        HashMap<Participant, Integer> scoreMap = new HashMap<>();
+    private void showAllCardsAndScore(BlackjackGame blackjackGame) {
+        Participants participants = blackjackGame.getParticipants();
+
+        showDealerCardsAndScore(participants);
+        showPlayersCardsAndScore(participants);
+    }
+
+    private void showDealerCardsAndScore(Participants participants) {
+        Dealer dealer = participants.getDealer();
         outputView.outputPlayerCard(dealer.getName(), dealer.getCardNames());
-        scoreMap.put(dealer, dealer.getTotalScore());
-        outputView.outputScore(scoreMap.get(dealer));
-        for (Player player : participants.getPlayers()) {
+        outputView.outputScore(dealer.getTotalScore());
+    }
+
+    private void showPlayersCardsAndScore(Participants participants) {
+        List<Player> players = participants.getPlayers();
+
+        for(Player player: players) {
             outputView.outputPlayerCard(player.getName(), player.getCardNames());
-            scoreMap.put(player, player.getTotalScore());
-            outputView.outputScore(scoreMap.get(player));
+            outputView.outputScore(player.getTotalScore());
         }
+    }
 
+    private void showAllResult(BlackjackGame blackjackGame) {
         outputView.outputResult();
-        int win = 0;
-        int tie = 0;
-        int lose = 0;
-        int dealerScore = scoreMap.get(dealer);
-        for (Player player : participants.getPlayers()) {
-            int playerScore = scoreMap.get(player);
-            if (playerScore > 21) {
-                if (dealerScore > 21) tie++;
-                if (dealerScore <= 21) win++;
-                continue;
-            }
-            if (dealerScore <= 21 && dealerScore > playerScore) win++;
-            if (dealerScore <= 21 && dealerScore == playerScore) tie++;
-            if (dealerScore <= 21 && dealerScore < playerScore) lose++;
-        }
 
-        outputView.outputDealerResult(dealer.getName(), win, tie, lose);
-
-
-        for (Player player : participants.getPlayers()) {
-            if (scoreMap.get(dealer) > scoreMap.get(player)) {
-                outputView.outputPlayerResult(player.getName(), "승");
-            }
-            if (scoreMap.get(dealer) == scoreMap.get(player)) {
-                outputView.outputPlayerResult(player.getName(), "무");
-            }
-            if (scoreMap.get(dealer) < scoreMap.get(player)) {
-                outputView.outputPlayerResult(player.getName(), "패");
-            }
-        }
-    }
-
-    private void giveTwoCardToPlayer(Participant player, Deck deck) {
-        player.drawCard(deck.drawCard());
-        player.drawCard(deck.drawCard());
-    }
-
-    private <T> T retry(final Supplier<T> supplier) {
-        for (int count = 0; count < 5; count++) {
-            try {
-                return supplier.get();
-            } catch (IllegalArgumentException e) {
-                outputView.printErrorMessage(e.getMessage());
-            }
-        }
-
-        throw new IllegalArgumentException(MAX_ATTEMPT_REACHED_ERROR_MESSAGE);
     }
 }
