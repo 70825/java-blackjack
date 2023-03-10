@@ -1,5 +1,7 @@
 package blackjack.controller;
 
+import blackjack.domain.betting.Money;
+import blackjack.domain.betting.ResultBetting;
 import blackjack.domain.card.Deck;
 import blackjack.domain.game.Order;
 import blackjack.domain.game.ResultGame;
@@ -26,10 +28,12 @@ public class BlackjackController {
     public void run() {
         final Participants participants = makeParticipants();
         final Deck deck = Deck.createAllCard();
+        final ResultBetting resultBetting = new ResultBetting(new HashMap<>());
 
+        initialBetMoney(participants, resultBetting);
         startGame(participants, deck);
         hitParticipants(participants, deck);
-        displayAllResult(participants);
+        displayAllResult(participants, resultBetting);
     }
 
     private Participants makeParticipants() {
@@ -37,6 +41,13 @@ public class BlackjackController {
         final List<String> playerNames = inputView.readPlayers();
 
         return new Participants(dealer, playerNames, new ArrayList<>());
+    }
+
+    private void initialBetMoney(final Participants participants, final ResultBetting resultBetting) {
+        for (Participant player : participants.getPlayers()) {
+            final Money money = new Money(inputView.readBettingMoney(player.getName()));
+            resultBetting.betMoney(player, money);
+        }
     }
 
     private void startGame(final Participants participants, final Deck deck) {
@@ -84,10 +95,16 @@ public class BlackjackController {
         outputView.printAllCardsAndScore(participants);
     }
 
-    private void displayAllResult(final Participants participants) {
+    private void displayAllResult(final Participants participants, final ResultBetting resultBetting) {
         final ResultGame resultGame = new ResultGame(new HashMap<>());
-
         resultGame.calculateResult(participants);
+
+        for (final Participant player : participants.getPlayers()) {
+            System.out.println(player);
+            System.out.println(resultGame.getPlayerResult(player));
+            resultBetting.updateMoney(player, resultGame.getPlayerResult(player));
+        }
+
         outputView.printParticipantsResult(participants, resultGame);
     }
 }

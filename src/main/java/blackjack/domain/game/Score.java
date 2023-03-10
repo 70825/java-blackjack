@@ -17,7 +17,7 @@ public class Score {
     }
 
     public boolean isHit() {
-        return value <= BLACKJACK;
+        return value < BLACKJACK;
     }
 
     public boolean isHit(final int hitScore) {
